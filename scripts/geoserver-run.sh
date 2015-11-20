@@ -21,11 +21,11 @@ function startGeoServer {
     if [[ ${CATALINA_HOME} && -e ${CATALINA_HOME}/bin/catalina.sh ]]; then
         tc_script=${CATALINA_HOME}/bin/catalina.sh
     elif [[ -e /usr/lib/tomcat/bin/catalina.sh ]]; then
-        tc_script=usr/lib/tomcat/bin/catalina.sh
+        tc_script=/usr/lib/tomcat/bin/catalina.sh
     elif [[ $(which catalina.sh 2>/dev/null) ]]; then
         tc_script=$(which catalina.sh 2>/dev/null)
     else
-        echo >&2 "Unable to start GeoServer. Cannot find tomcat \"startup.sh\" script."
+        echo >&2 "Unable to start GeoServer. Cannot find tomcat \"catalina.sh\" script."
         exit 2
     fi
 
@@ -50,7 +50,7 @@ while [[ ! -z ${1} ]]; do
             shift
             ;;
         *)
-            echo >&2 "Unkown option provided: ${1}"
+            echo >&2 "Unknown option provided: ${1}"
             exit 1
     esac
     shift

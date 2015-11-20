@@ -26,6 +26,8 @@ RUN chown -R tomcat:tomcat /var/lib/geoserver /var/lib/tomcat/webapps/geoserver 
 
 COPY scripts /opt/geoserver-startup-scripts
 
+RUN chmod a+x /opt/geoserver-startup-scripts/geoserver-run.sh
+
 EXPOSE 8080
 
 VOLUME ["/var/lib/geoserver/data", "/var/lib/tomcat/webapps/geoserver", "/var/log/tomcat"]
