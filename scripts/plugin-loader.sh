@@ -2,7 +2,7 @@
 
 sp_file=${0%/*}/supported-plugins.txt
 
-if [[ -z ${GEOSERVER_SRC} ]]; do
+if [[ -z ${GEOSERVER_SRC} ]]; then
     echo >&2 "Cannot load plugins. GEOSERVER_SRC is unset, so they cannot be found."
 fi
 

@@ -10,7 +10,7 @@ ADD https://github.com/brian-dlee/centos-equip/raw/master/equip.sh /root/equip.s
 RUN bash /root/equip.sh maven:3 tomcat:8
 
 COPY geoserver-2.7.3.tar.gz /opt/geoserver-2.7.3.tar.gz
-RUN tar zxf /geoserver-2.7.3.tar.gz -C /opt/
+RUN tar zxf /opt/geoserver-2.7.3.tar.gz -C /opt/
 RUN cd /opt/geoserver-2.7.3/src && \
     mvn clean install
 
