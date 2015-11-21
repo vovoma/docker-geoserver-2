@@ -2,7 +2,8 @@ FROM centos:7
 MAINTAINER Brian Lee <briandl92391@gmail.com>
 
 RUN yum -y update
-RUN yum -y install epel-release unzip
+RUN yum -y install epel-release
+RUN yum -y install unzip netcdf-devel gdal gdal-devel gdal-java
 
 # This depends on java so we don't need to explicitly install the java JDK
 # Oracle Java 1.7 64-bit will be installed
@@ -22,6 +23,9 @@ RUN eval 'for i in /opt/geoserver-2.7.4-plugins/*.zip; do unzip -n $i -d /var/li
 
 ENV GEOSERVER_HOME=/var/lib/tomcat/webapps/geoserver
 ENV GEOSERVER_DATA_DIR=/var/lib/geoserver/data
+
+# Not sure if I need this
+ENV JNA_PATH=/usr/lib
 
 RUN chown -R tomcat:tomcat /var/lib/geoserver /var/lib/tomcat/webapps/geoserver && \
     chmod -R 770 /var/lib/geoserver /var/lib/tomcat/webapps/geoserver
