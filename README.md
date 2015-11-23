@@ -11,7 +11,6 @@ Getting the container: `docker pull briandlee/geoserver@2.7`
 
 #### Mount Configuration
 * Mounting the geoserver data directory: `-v SOURCE_DIRECTORY:/var/lib/geoserver/data`
-* Mounting the geoserver application directory: `-v SOURCE_DIRECTORY:/var/lib/tomcat/webapps/geoserver`
 * Mounting the tomcat log directory: `-v SOURCE_DIRECTORY:/var/log/tomcat`
 
 ### Running container:
