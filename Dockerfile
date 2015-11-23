@@ -16,6 +16,7 @@ COPY source/plugins /opt/geoserver-2.7.4-plugins
 RUN unzip /opt/geoserver-2.7.4.war.zip -d /opt/ && rm -f /opt/geoserver-2.7.4.war.zip
 
 RUN unzip /opt/geoserver.war -d /var/lib/tomcat/webapps/geoserver
+RUN rm -rf /var/lib/tomcat/webapps/ROOT
 RUN ln -s /var/lib/tomcat/webapps/geoserver /var/lib/tomcat/webapps/ROOT
 RUN eval 'for i in /opt/geoserver-2.7.4-plugins/*.zip; do unzip -n $i -d /var/lib/tomcat/webapps/geoserver/WEB-INF/lib/; done;'
 
