@@ -15,23 +15,22 @@ COPY source/plugins /opt/geoserver-2.7.4-plugins
 
 RUN unzip /opt/geoserver-2.7.4.war.zip -d /opt/ && rm -f /opt/geoserver-2.7.4.war.zip
 
-RUN mkdir /var/lib/tomcat/webapps/geoserver
-RUN mkdir -p /var/lib/geoserver/data
-
 RUN unzip /opt/geoserver.war -d /var/lib/tomcat/webapps/geoserver
+RUN ln -s /var/lib/tomcat/webapps/geoserver /var/lib/tomcat/webapps/ROOT
 RUN eval 'for i in /opt/geoserver-2.7.4-plugins/*.zip; do unzip -n $i -d /var/lib/tomcat/webapps/geoserver/WEB-INF/lib/; done;'
 
-ENV GEOSERVER_HOME=/var/lib/tomcat/webapps/geoserver
-ENV GEOSERVER_DATA_DIR=/var/lib/geoserver/data
+RUN mkdir -p /var/lib/geoserver/data
 
-# Not sure if I need this
-ENV JNA_PATH=/usr/lib
+ENV LD_LIBRARY_PATH "/usr/lib64:/usr/local/lib:/usr/lib/java/gdal"
+ENV CATALINA_OPTS "-Xmx256M -Xms48m -XX:MaxPermSize=128m -server"
+ENV GEOSERVER_HOME "/var/lib/tomcat/webapps/geoserver"
+ENV GEOSERVER_DATA_DIR "/var/lib/geoserver/data"
 
 RUN chown -R tomcat:tomcat /var/lib/geoserver /var/lib/tomcat/webapps/geoserver && \
     chmod -R 770 /var/lib/geoserver /var/lib/tomcat/webapps/geoserver
 
 EXPOSE 8080
 
-VOLUME ["/var/lib/geoserver/data", "/var/lib/tomcat/webapps/geoserver", "/var/log/tomcat"]
+VOLUME ["/var/lib/geoserver/data/", "/var/lib/tomcat/webapps/geoserver/", "/var/log/tomcat/"]
 
 CMD ["/usr/local/share/tomcat/bin/catalina.sh", "run"]
