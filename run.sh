@@ -12,7 +12,7 @@ function help {
 CONTAINER_HOME=$(cd $(dirname ${0}); pwd | sed 's/ /\\ /')
 
 mounts=("-v ${CONTAINER_HOME}/data:/var/lib/geoserver/data" "-v ${CONTAINER_HOME}/logs:/var/log/tomcat")
-options=('-d')
+options=('-p 80:8080 -d')
 tag='2.7'
 args=()
 
