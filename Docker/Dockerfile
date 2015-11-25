@@ -10,8 +10,8 @@ RUN yum -y install unzip netcdf-devel gdal gdal-devel gdal-java
 ADD https://github.com/brian-dlee/centos-equip/raw/master/equip.sh /root/equip.sh
 RUN bash /root/equip.sh maven:3 tomcat:8
 
-COPY source/geoserver-2.7.4.war.zip /opt/geoserver-2.7.4.war.zip
-COPY source/plugins /opt/geoserver-2.7.4-plugins
+COPY geoserver-2.7.4.war.zip /opt/geoserver-2.7.4.war.zip
+COPY plugins /opt/geoserver-2.7.4-plugins
 
 RUN unzip /opt/geoserver-2.7.4.war.zip -d /opt/ && rm -f /opt/geoserver-2.7.4.war.zip
 
@@ -26,6 +26,7 @@ ENV LD_LIBRARY_PATH "/usr/lib64:/usr/local/lib:/usr/lib/java/gdal"
 ENV CATALINA_OPTS "-Xmx256M -Xms48m -XX:MaxPermSize=128m -server"
 ENV GEOSERVER_HOME "/var/lib/tomcat/webapps/geoserver"
 ENV GEOSERVER_DATA_DIR "/var/lib/geoserver/data"
+ENV GEOSERVER_LOG_LOCATION "/var/log/tomcat/geoserver.log"
 
 RUN chown -R tomcat:tomcat /var/lib/geoserver /var/lib/tomcat/webapps/geoserver && \
     chmod -R 770 /var/lib/geoserver /var/lib/tomcat/webapps/geoserver
