@@ -23,7 +23,7 @@ RUN eval 'for i in /opt/geoserver-2.7.4-plugins/*.zip; do unzip -n $i -d /var/li
 RUN mkdir -p /var/lib/geoserver/data
 
 ENV LD_LIBRARY_PATH "/usr/lib64:/usr/local/lib:/usr/lib/java/gdal"
-ENV CATALINA_OPTS "-Xmx256M -Xms48m -XX:MaxPermSize=128m -server"
+ENV CATALINA_OPTS "-Xmx256M -Xms48m -XX:MaxPermSize=256m -server"
 ENV GEOSERVER_HOME "/var/lib/tomcat/webapps/geoserver"
 ENV GEOSERVER_DATA_DIR "/var/lib/geoserver/data"
 ENV GEOSERVER_LOG_LOCATION "/var/log/tomcat/geoserver.log"
