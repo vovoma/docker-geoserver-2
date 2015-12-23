@@ -10,15 +10,15 @@ RUN yum -y install unzip netcdf-devel gdal gdal-devel gdal-java
 ADD https://github.com/brian-dlee/centos-equip/raw/master/equip.sh /root/equip.sh
 RUN bash /root/equip.sh maven:3 tomcat:8
 
-COPY geoserver-2.7.4.war.zip /opt/geoserver-2.7.4.war.zip
-COPY plugins /opt/geoserver-2.7.4-plugins
+COPY geoserver-2.8.1.war.zip /opt/geoserver-2.8.1.war.zip
+COPY plugins /opt/geoserver-2.8.1-plugins
 
-RUN unzip /opt/geoserver-2.7.4.war.zip -d /opt/ && rm -f /opt/geoserver-2.7.4.war.zip
+RUN unzip /opt/geoserver-2.8.1.war.zip -d /opt/ && rm -f /opt/geoserver-2.8.1.war.zip
 
 RUN unzip /opt/geoserver.war -d /var/lib/tomcat/webapps/geoserver
 RUN rm -rf /var/lib/tomcat/webapps/ROOT
 RUN ln -s /var/lib/tomcat/webapps/geoserver /var/lib/tomcat/webapps/ROOT
-RUN eval 'for i in /opt/geoserver-2.7.4-plugins/*.zip; do unzip -n $i -d /var/lib/tomcat/webapps/geoserver/WEB-INF/lib/; done;'
+RUN eval 'for i in /opt/geoserver-2.8.1-plugins/*.zip; do unzip -n $i -d /var/lib/tomcat/webapps/geoserver/WEB-INF/lib/; done;'
 
 RUN mkdir -p /var/lib/geoserver/data
 

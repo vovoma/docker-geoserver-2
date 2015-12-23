@@ -2,18 +2,22 @@
 
 function help {
     echo "run.sh [options] [args]"
-    echo "    -h Display this help dialog"
-    echo "    -i Interactive mode, boots into shell of container (may conflict with args if supplied)"
-    echo "    -t Specifies tag for briandlee/geoserver image"
-    echo "    -v Mount volume, see docker documentation on \`docker run\`'s -v option"
+    echo "    -dp Destination port to map to (default: 8080)"
+    echo "    -h  Display this help dialog"
+    echo "    -i  Interactive mode, overrides default behavior to daemonize"
+    echo "    -sp Source port to map (default: 80)"
+    echo "    -t  Specifies tag for briandlee/geoserver image"
+    echo "    -v  Mount volume, see docker documentation on \`docker run\`'s -v option"
     exit ${1}
 }
 
 CONTAINER_HOME=$(cd $(dirname ${0}); pwd | sed 's/ /\\ /')
 
 mounts=("-v ${CONTAINER_HOME}/data:/var/lib/geoserver/data" "-v ${CONTAINER_HOME}/logs:/var/log/tomcat")
-options=('-p 80:8080 -d')
-tag='2.7'
+destport='8080'
+tag='latest'
+srcport='80'
+runtype='-d'
 args=()
 
 while [[ ${1} ]]; do
@@ -22,7 +26,7 @@ while [[ ${1} ]]; do
             help 0
             ;;
         -i)
-            options=('-it')
+            runtype='-it'
             mounts+=('-v ~/.bash_history:/root/.bash_history')
             args=('/bin/bash')
             ;;
@@ -33,6 +37,14 @@ while [[ ${1} ]]; do
         -v)
             shift
             mounts+=("-v ${1// /\\ }")
+            ;;
+        -dp)
+            shift
+            destport=${1}
+            ;;
+        -sp)
+            shift
+            srcport=${1}
             ;;
         -*)
             echo >2 'Unkown option provided: ${1}'
@@ -46,6 +58,6 @@ done
 
 pushd ${DOCKER_BUILD_LOCATION} 2>/dev/null
 
-eval "docker run ${mounts[@]} ${options[@]} briandlee/geoserver@${tag} ${args}"
+eval "docker run ${mounts[@]} -p ${srcport}:${destport} ${runtype} briandlee/geoserver@${tag} ${args}"
 
 popd 2>/dev/null
