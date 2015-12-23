@@ -1,2 +1,0 @@
-netcdf:yum=netcdf-devel|lib=*netcdf*
-gdal:yum=gdal-java,gdal|lib=*gdal*
