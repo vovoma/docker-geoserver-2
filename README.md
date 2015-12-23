@@ -19,12 +19,12 @@ By default run.sh will mount the two aforementioned host directories to the cont
 To configure this further, see the help output of run.sh (`run.sh --help`).
 
 ## Manually using the GeoServer Docker container
-Pull the container from hub.docker.com: `docker pull briandlee/geoserver@2.7`
+Pull the container from hub.docker.com: `docker pull briandlee/geoserver@2.8`
 
 ### Running the container
-To run the docker container with basic configuration: `docker run -P -d briandlee/geoserver@2.7`
+To run the docker container with basic configuration: `docker run -P -d briandlee/geoserver@2.8`
 
-The container can be further configured using the following options. Options go after `run`, but before the image designation. `docker run [options] -d briandlee/geoserver@2.7`
+The container can be further configured using the following options. Options go after `run`, but before the image designation. `docker run [options] -d briandlee/geoserver@2.8`
 
 #### Network Configuration
 Below are the possible options for configuring the host and container's network mapping (these are mutually exclusive).
