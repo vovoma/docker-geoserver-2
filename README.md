@@ -3,6 +3,7 @@ Dockerfile and supporting scripts for building a docker container served by Tomc
 
 ## Getting Started
 There are two ways to use the GeoServer Docker container.
+
 1. Cloning this repo and building/running the container using run.sh (See Using the GitHub Project)
 2. Pulling the image directly and using the `docker run` to run the container (See Using the Docker container)
 
